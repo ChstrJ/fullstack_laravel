@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "http://127.0.0.1:8000/api"
+  baseURL: "http://127.0.0.1:8000/api/",
 });
 
 axiosClient.interceptors.request.use((config) => {
@@ -15,11 +15,15 @@ axiosClient.interceptors.response.use(
     return response;
   },
   (error) => {
-    const {response} = error;
-    if (response.status === 401) {
-       localStorage.removeItem('ACCESS_TOKEN')
+    try {
+      const { response } = error;
+      if (response.status === 401) {
+        console.log('error 401')
+      }
+    } catch (error) {
+      console.log(error)
     }
-    throw new error
+    throw error;
   }
 );
 

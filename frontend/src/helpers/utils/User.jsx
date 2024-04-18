@@ -1,8 +1,13 @@
+import { Navigate, useNavigate } from "react-router-dom"
+
 
 export default class User {
     
+
     static logout() {
-        console.log('testing');
+       localStorage.removeItem('ACCESS_TOKEN')
+      
+       
     }
 
     static submit(e) {  

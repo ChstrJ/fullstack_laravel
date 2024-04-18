@@ -18,10 +18,18 @@ export default function Register() {
       email: emailRef.current.value,
       password: passRef.current.value,
     };
-    axiosClient.post("register", payload)
-    .then((data) => {
-      setUser(data.user);
-      setToken(data.token);
+    axiosClient.post("/register", payload)
+    .then((res) => {
+      const {user, token} = res.data
+
+    
+      setUser(user);
+      setToken(token);
+
+
+      nameRef.current.value = ""
+      emailRef.current.value = ""
+      passRef.current.value = ""
     })
     .catch(err => {
       const response = err.response
